@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>日記TOP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+</head>
+<style>
+    body{
+        max-width: 1128px;
+        min-width: 768px;
+        list-style: none;
+    }
+    .new-create{
+    display:flex;
+    justify-content: space-between;
+    }
+    .new-ul{
+        display:inline-block;
+        text-align: center;
+        width: 100%;
+        height:100%;
+    }
+    @media (min-width: 576px)
+.container, .container-sm {
+    max-width: 540px;
+}
+
+    .fragment{color:black;}
+
+    @media screen and (max-width: 768px) {
+        .new-ul{
+        display:block;
+        width: 303px;
+        height:100%;
+    }
+    }
+    .new-title{
+        display:flex;
+        text-align:center;
+        justify-content:center;
+  }
+  .detail-list{
+    margin-top: 0;
+    display:flex;
+  }
+  .ul-title{
+    font-size: 20px;
+  }
+  .card{
+    list-style: none;
+  }
+    .header{
+     text-decoration:none ;
+     color:black;
+    }
+    .title{
+     color:black;
+    }
+
+</style>
+<body>
+
+<h2>日記｜トップページ</h2>
+<div class="new-create">
+    <div class="container">
+            <a class="title" href="/diary/list">記事一覧</a></li>
+            <a class="title" href="/diarys/create-diary.html" th:href="@{/diary/create}">作成</a></li>
+        <div class="new-title">最近投稿された記事</div>
+        <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>日時</th>
+                <th>使用技術</th>
+                <th>削除</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entity : ${entitylist}">
+                <td>
+                    <a class="header" th:href="@{/diary/{diaryId}(diaryId=${entity.id})}" th:text="${entity.title}"></a>
+                </td>
+                <td th:text="${entity.date}"></td>
+                <td th:text="${entity.use_tech}"></td>
+                <td>
+                    <form th:action="@{/diary/delete/top/{id}(id=${entity.id})}" th:method="post" onsubmit="return confirm('削除してもよろしいですか？')">
+                        <input class="btn btn-danger" type="submit" value="削除">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    </div>
+</div>
+</body>
+</html>

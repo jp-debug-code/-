@@ -1,0 +1,1 @@
+INSERT INTO diary (date,title,text)values('2023-11-28','テスト','テスト');
